@@ -6,7 +6,11 @@ use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApprenticeController;
+use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('dashboard');
+});
 Route::resource('areas', AreaController::class);
 Route::resource('training-centers', TrainingCenterController::class);
 Route::resource('computers', ComputerController::class);
