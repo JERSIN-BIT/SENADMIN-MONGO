@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Course extends Model
 {
@@ -12,8 +11,19 @@ class Course extends Model
     protected $collection = 'courses';
 
     protected $fillable = [
-        'name',
-        'code',
-        'teacher_id',
+        'course_number',
+        'day',
+        'area_id',
+        'training_center_id',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function trainingCenter()
+    {
+        return $this->belongsTo(TrainingCenter::class, 'training_center_id');
+    }
 }

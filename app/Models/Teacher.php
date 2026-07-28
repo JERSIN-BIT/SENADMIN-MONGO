@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Teacher extends Model
 {
@@ -14,7 +13,17 @@ class Teacher extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone',
+        'area_id',
         'training_center_id',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function trainingCenter()
+    {
+        return $this->belongsTo(TrainingCenter::class, 'training_center_id');
+    }
 }
