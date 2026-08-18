@@ -8,13 +8,13 @@
 
             <div class="card">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-warning">
 
                     <h4 class="mb-0">
 
-                        <i class="bi bi-plus-circle"></i>
+                        <i class="bi bi-pencil-square"></i>
 
-                        Registrar Centro de Formación
+                        Editar Centro de Formación
 
                     </h4>
 
@@ -36,9 +36,11 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('training-centers.store') }}" method="POST">
+                    <form action="{{ route('training-centers.update', $trainingCenter->_id) }}" method="POST">
 
                         @csrf
+
+                        @method('PUT')
 
                         <div class="mb-3">
 
@@ -46,8 +48,8 @@
                                 Nombre del centro
                             </label>
 
-                            <input type="text" name="name" class="form-control"
-                                placeholder="Ejemplo: Centro de Comercio y Servicios" value="{{ old('name') }}" required>
+                            <input type="text" name="name" class="form-control" value="{{ $trainingCenter->name }}"
+                                required>
 
                         </div>
 
@@ -57,22 +59,22 @@
                                 Dirección
                             </label>
 
-                            <input type="text" name="address" class="form-control" placeholder="Dirección del centro"
-                                value="{{ old('address') }}" required>
+                            <input type="text" name="address" class="form-control" value="{{ $trainingCenter->address }}"
+                                required>
 
                         </div>
 
                         <button type="submit" class="btn btn-success">
 
                             <i class="bi bi-check-circle"></i>
-                            Guardar
+                            Actualizar
 
                         </button>
 
                         <a href="{{ route('training-centers.index') }}" class="btn btn-secondary">
 
                             <i class="bi bi-arrow-left"></i>
-                            Volver
+                            Cancelar
 
                         </a>
 
