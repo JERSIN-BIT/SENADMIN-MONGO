@@ -10,12 +10,7 @@ class Teacher extends Model
 
     protected $collection = 'teachers';
 
-    protected $fillable = [
-        'name',
-        'email',
-        'area_id',
-        'training_center_id',
-    ];
+    protected $fillable = ['name', 'email', 'area_id', 'training_center_id'];
 
     public function area()
     {

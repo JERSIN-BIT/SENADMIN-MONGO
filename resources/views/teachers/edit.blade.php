@@ -8,11 +8,11 @@
 
             <div class="card">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-warning">
 
                     <h4 class="mb-0">
-                        <i class="bi bi-person-plus"></i>
-                        Registrar Instructor
+                        <i class="bi bi-pencil-square"></i>
+                        Editar Instructor
                     </h4>
 
                 </div>
@@ -33,16 +33,17 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('teachers.store') }}" method="POST">
+                    <form action="{{ route('teachers.update', $teacher->_id) }}" method="POST">
 
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-3">
 
                             <label class="form-label">Nombre completo</label>
 
-                            <input type="text" name="name" class="form-control" placeholder="Ejemplo: María Gómez"
-                                value="{{ old('name') }}" required>
+                            <input type="text" name="name" class="form-control"
+                                value="{{ old('name', $teacher->name) }}" required>
 
                         </div>
 
@@ -51,7 +52,7 @@
                             <label class="form-label">Correo electrónico</label>
 
                             <input type="email" name="email" class="form-control"
-                                placeholder="Ejemplo: maria.gomez@sena.edu.co" value="{{ old('email') }}" required>
+                                value="{{ old('email', $teacher->email) }}" required>
 
                         </div>
 
@@ -64,7 +65,7 @@
                                 <option value="">Seleccione un área</option>
 
                                 @foreach ($areas as $area)
-                                    <option value="{{ $area->_id }}" @selected(old('area_id') == $area->_id)>
+                                    <option value="{{ $area->_id }}" @selected(old('area_id', $teacher->area_id) == $area->_id)>
                                         {{ $area->name }}
                                     </option>
                                 @endforeach
@@ -82,7 +83,7 @@
                                 <option value="">Seleccione un centro de formación</option>
 
                                 @foreach ($trainingCenters as $trainingCenter)
-                                    <option value="{{ $trainingCenter->_id }}" @selected(old('training_center_id') == $trainingCenter->_id)>
+                                    <option value="{{ $trainingCenter->_id }}" @selected(old('training_center_id', $teacher->training_center_id) == $trainingCenter->_id)>
                                         {{ $trainingCenter->name }}
                                     </option>
                                 @endforeach
@@ -95,12 +96,12 @@
 
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-check-circle"></i>
-                                Guardar
+                                Actualizar
                             </button>
 
                             <a href="{{ route('teachers.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i>
-                                Volver
+                                Cancelar
                             </a>
 
                         </div>
