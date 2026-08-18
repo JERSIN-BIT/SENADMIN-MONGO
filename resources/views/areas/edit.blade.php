@@ -8,13 +8,13 @@
 
             <div class="card">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-warning">
 
                     <h4 class="mb-0">
 
-                        <i class="bi bi-plus-circle"></i>
+                        <i class="bi bi-pencil-square"></i>
 
-                        Registrar Área
+                        Editar Área
 
                     </h4>
 
@@ -36,9 +36,11 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('areas.store') }}" method="POST">
+                    <form action="{{ route('areas.update', $area->_id) }}" method="POST">
 
                         @csrf
+
+                        @method('PUT')
 
                         <div class="mb-4">
 
@@ -48,8 +50,7 @@
 
                             </label>
 
-                            <input type="text" name="name" class="form-control" placeholder="Ejemplo: Sistemas"
-                                value="{{ old('name') }}" required>
+                            <input type="text" name="name" class="form-control" value="{{ $area->name }}" required>
 
                         </div>
 
@@ -59,7 +60,7 @@
 
                                 <i class="bi bi-check-circle"></i>
 
-                                Guardar
+                                Actualizar
 
                             </button>
 
@@ -67,7 +68,7 @@
 
                                 <i class="bi bi-arrow-left"></i>
 
-                                Volver
+                                Cancelar
 
                             </a>
 

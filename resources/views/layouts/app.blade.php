@@ -15,59 +15,46 @@
 
     <style>
         body {
-
             background: #edf2f7;
-
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .navbar {
-
-            background: #0d6efd;
-
+            background: #198754;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, .2);
         }
 
         .navbar-brand {
-
-            color: white !important;
-
+            font-size: 28px;
             font-weight: bold;
-
-            font-size: 25px;
-
+            color: white !important;
         }
 
         .card {
-
             border: none;
-
             border-radius: 18px;
-
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
             transition: .3s;
-
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
-
         }
 
         .card:hover {
-
             transform: translateY(-8px);
-
-        }
-
-        .btn {
-
-            border-radius: 12px;
-
         }
 
         .table {
-
             background: white;
-
             border-radius: 15px;
-
             overflow: hidden;
+        }
 
+        .btn {
+            border-radius: 10px;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: gray;
         }
     </style>
 
@@ -93,9 +80,29 @@
 
     <div class="container mt-5">
 
+        @if (session('success'))
+            <div class="alert alert-success">
+
+                {{ session('success') }}
+
+            </div>
+        @endif
+
         @yield('content')
 
     </div>
+
+    <footer>
+
+        <hr>
+
+        SENADMIN MONGO © 2026
+
+        <br>
+
+        Desarrollado por Alexis
+
+    </footer>
 
 </body>
 
