@@ -8,11 +8,11 @@
 
             <div class="card">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-warning">
 
                     <h4 class="mb-0">
-                        <i class="bi bi-journal-plus"></i>
-                        Registrar Curso
+                        <i class="bi bi-pencil-square"></i>
+                        Editar Curso
                     </h4>
 
                 </div>
@@ -33,16 +33,17 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('courses.store') }}" method="POST">
+                    <form action="{{ route('courses.update', $course->_id) }}" method="POST">
 
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-3">
 
                             <label class="form-label">Número de ficha</label>
 
-                            <input type="text" name="course_number" class="form-control" placeholder="Ejemplo: 2998765"
-                                value="{{ old('course_number') }}" required>
+                            <input type="text" name="course_number" class="form-control"
+                                value="{{ old('course_number', $course->course_number) }}" required>
 
                         </div>
 
@@ -50,8 +51,8 @@
 
                             <label class="form-label">Jornada</label>
 
-                            <input type="text" name="day" class="form-control" placeholder="Ejemplo: Diurna"
-                                value="{{ old('day') }}" required>
+                            <input type="text" name="day" class="form-control" value="{{ old('day', $course->day) }}"
+                                required>
 
                         </div>
 
@@ -64,7 +65,7 @@
                                 <option value="">Seleccione un área</option>
 
                                 @foreach ($areas as $area)
-                                    <option value="{{ $area->_id }}" @selected(old('area_id') == $area->_id)>
+                                    <option value="{{ $area->_id }}" @selected(old('area_id', $course->area_id) == $area->_id)>
                                         {{ $area->name }}
                                     </option>
                                 @endforeach
@@ -82,7 +83,7 @@
                                 <option value="">Seleccione un centro de formación</option>
 
                                 @foreach ($trainingCenters as $trainingCenter)
-                                    <option value="{{ $trainingCenter->_id }}" @selected(old('training_center_id') == $trainingCenter->_id)>
+                                    <option value="{{ $trainingCenter->_id }}" @selected(old('training_center_id', $course->training_center_id) == $trainingCenter->_id)>
                                         {{ $trainingCenter->name }}
                                     </option>
                                 @endforeach
@@ -95,12 +96,12 @@
 
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-check-circle"></i>
-                                Guardar
+                                Actualizar
                             </button>
 
                             <a href="{{ route('courses.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i>
-                                Volver
+                                Cancelar
                             </a>
 
                         </div>

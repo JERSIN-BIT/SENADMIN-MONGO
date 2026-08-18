@@ -10,13 +10,7 @@ class Apprentice extends Model
 
     protected $collection = 'apprentices';
 
-    protected $fillable = [
-        'name',
-        'email',
-        'cell_number',
-        'course_id',
-        'computer_id',
-    ];
+    protected $fillable = ['name', 'email', 'cell_number', 'course_id', 'computer_id'];
 
     public function course()
     {

@@ -1,62 +1,154 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Aprendices</title>
-</head>
+@section('content')
 
-<body>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h1>Listado de Aprendices</h1>
+        <div>
+            <h1>
+                <i class="bi bi-people"></i>
+                Aprendices
+            </h1>
 
-    <a href="{{ route('apprentices.create') }}">
+            <p class="text-secondary mb-0">
+                Administración de los aprendices registrados
+            </p>
+        </div>
 
-        Nuevo Aprendiz
+        <a href="{{ route('apprentices.create') }}" class="btn btn-success">
+            <i class="bi bi-person-plus"></i>
+            Nuevo Aprendiz
+        </a>
 
-    </a>
+    </div>
 
-    <hr>
+    <div class="card mb-4">
 
-    @if ($apprentices->count())
+        <div class="card-body">
 
-        <table border="1" cellpadding="10">
+            <form method="GET" action="{{ route('apprentices.index') }}">
 
-            <tr>
+                <div class="row g-2">
 
-                <th>Nombre</th>
+                    <div class="col-md-8">
+                        <input type="text" name="buscar" class="form-control"
+                            placeholder="Buscar por nombre, correo o celular..." value="{{ $buscar }}">
+                    </div>
 
-                <th>Email</th>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-search"></i>
+                            Buscar
+                        </button>
+                    </div>
 
-                <th>Celular</th>
+                    <div class="col-md-2">
+                        <a href="{{ route('apprentices.index') }}" class="btn btn-secondary w-100">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Limpiar
+                        </a>
+                    </div>
 
-                <th>Curso</th>
+                </div>
 
-                <th>Computador</th>
+            </form>
 
-            </tr>
+        </div>
 
-            @foreach ($apprentices as $apprentice)
-                <tr>
+    </div>
 
-                    <td>{{ $apprentice->name }}</td>
+    <div class="card">
 
-                    <td>{{ $apprentice->email }}</td>
+        <div class="card-body">
 
-                    <td>{{ $apprentice->cell_number }}</td>
+            @if ($apprentices->count())
+                <div class="table-responsive">
 
-                    <td>{{ $apprentice->course->course_number ?? 'Sin curso' }}</td>
+                    <table class="table table-hover align-middle">
 
-                    <td>{{ $apprentice->computer->number ?? 'Sin computador' }}</td>
+                        <thead class="table-success">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Correo electrónico</th>
+                                <th>Celular</th>
+                                <th>Ficha</th>
+                                <th>Computador</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
 
-                </tr>
-            @endforeach
+                        <tbody>
 
-        </table>
-    @else
-        No hay aprendices.
+                            @foreach ($apprentices as $apprentice)
+                                <tr>
+                                    <td>
+                                        {{ $loop->iteration + ($apprentices->currentPage() - 1) * $apprentices->perPage() }}
+                                    </td>
 
-    @endif
+                                    <td>
+                                        <strong>{{ $apprentice->name }}</strong>
+                                    </td>
 
-</body>
+                                    <td>{{ $apprentice->email }}</td>
 
-</html>
+                                    <td>{{ $apprentice->cell_number }}</td>
+
+                                    <td>{{ $apprentice->course->course_number ?? 'Sin curso asignado' }}</td>
+
+                                    <td>{{ $apprentice->computer->number ?? 'Sin computador asignado' }}</td>
+
+                                    <td class="text-center">
+
+                                        <a href="{{ route('apprentices.edit', $apprentice->_id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil-square"></i>
+                                            Editar
+                                        </a>
+
+                                        <form action="{{ route('apprentices.destroy', $apprentice->_id) }}" method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('¿Está seguro de eliminar este aprendiz?');">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                                Eliminar
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="mt-3">
+                    {{ $apprentices->links() }}
+                </div>
+            @else
+                <div class="text-center py-5">
+
+                    <i class="bi bi-person-x fs-1 text-secondary"></i>
+
+                    <h4 class="mt-3">No se encontraron aprendices</h4>
+
+                    <p class="text-secondary mb-0">
+                        Intenta realizar otra búsqueda o registra un nuevo aprendiz.
+                    </p>
+
+                </div>
+            @endif
+
+        </div>
+
+    </div>
+
+@endsection

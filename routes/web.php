@@ -18,8 +18,9 @@ Route::resource('areas', AreaController::class);
 Route::resource('training-centers', TrainingCenterController::class);
 
 Route::resource('teachers', TeacherController::class)->except(['show']);
-Route::resource('courses', CourseController::class);
 
-Route::resource('computers', ComputerController::class);
+Route::resource('courses', CourseController::class)->except(['show']);
 
-Route::resource('apprentices', ApprenticeController::class);
+Route::resource('computers', ComputerController::class)->except(['show']);
+
+Route::resource('apprentices', ApprenticeController::class)->except(['show']);

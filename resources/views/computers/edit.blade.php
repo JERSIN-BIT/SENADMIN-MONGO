@@ -8,11 +8,11 @@
 
             <div class="card">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-warning">
 
                     <h4 class="mb-0">
-                        <i class="bi bi-pc-display"></i>
-                        Registrar Computador
+                        <i class="bi bi-pencil-square"></i>
+                        Editar Computador
                     </h4>
 
                 </div>
@@ -33,16 +33,17 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('computers.store') }}" method="POST">
+                    <form action="{{ route('computers.update', $computer->_id) }}" method="POST">
 
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-3">
 
                             <label class="form-label">Número o código</label>
 
-                            <input type="text" name="number" class="form-control" placeholder="Ejemplo: PC-001"
-                                value="{{ old('number') }}" required>
+                            <input type="text" name="number" class="form-control"
+                                value="{{ old('number', $computer->number) }}" required>
 
                         </div>
 
@@ -50,8 +51,8 @@
 
                             <label class="form-label">Marca</label>
 
-                            <input type="text" name="brand" class="form-control" placeholder="Ejemplo: Lenovo"
-                                value="{{ old('brand') }}" required>
+                            <input type="text" name="brand" class="form-control"
+                                value="{{ old('brand', $computer->brand) }}" required>
 
                         </div>
 
@@ -59,12 +60,12 @@
 
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-check-circle"></i>
-                                Guardar
+                                Actualizar
                             </button>
 
                             <a href="{{ route('computers.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i>
-                                Volver
+                                Cancelar
                             </a>
 
                         </div>

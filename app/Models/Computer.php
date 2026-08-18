@@ -10,8 +10,5 @@ class Computer extends Model
 
     protected $collection = 'computers';
 
-    protected $fillable = [
-        'number',
-        'brand',
-    ];
+    protected $fillable = ['number', 'brand'];
 }
