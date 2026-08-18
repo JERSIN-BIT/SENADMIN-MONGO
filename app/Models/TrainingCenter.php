@@ -10,8 +10,5 @@ class TrainingCenter extends Model
 
     protected $collection = 'training_centers';
 
-    protected $fillable = [
-        'name',
-        'location',
-    ];
+    protected $fillable = ['name', 'address'];
 }
